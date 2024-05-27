@@ -1,6 +1,9 @@
 import { Context, Effect } from "effect";
-import { makeAnyFptsConverible, type FptsConvertible } from "./FptsConvertible";
-import type { InferFptsMappingFromEffectFunction } from "./InferFptsMapping";
+import {
+  makeAnyFptsConverible,
+  type FptsConvertible,
+} from "./internal/FptsConvertible";
+import type { InferFptsMappingFromEffectFunction } from "./internal/InferFptsMapping";
 import { effectToFpts } from "./effectToFpts";
 import { either } from "fp-ts";
 

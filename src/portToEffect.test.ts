@@ -7,7 +7,7 @@ import {
   makeAnyFptsConverible,
   type FptsAccess,
   type FptsConvertible,
-} from "./FptsConvertible";
+} from "./internal/FptsConvertible";
 
 it("portToEffect", async () => {
   interface Service2 extends FptsConvertible<"service2"> {

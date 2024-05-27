@@ -1,12 +1,15 @@
 import { Context, Effect } from "effect";
-import type { AnyEffectFunction, EffectFunction } from "./EffectFunction";
+import type {
+  AnyEffectFunction,
+  EffectFunction,
+} from "./internal/EffectFunction";
 import type {
   AnyFptsConvertible,
   FptsConvertible,
   FptsIdOf,
-} from "./FptsConvertible";
-import type { FptsFunction } from "./FptsFunction";
-import type { InferFptsMappingFromEffectFunction } from "./InferFptsMapping";
+} from "./internal/FptsConvertible";
+import type { FptsFunction } from "./internal/FptsFunction";
+import type { InferFptsMappingFromEffectFunction } from "./internal/InferFptsMapping";
 
 type EffectToFpts<F, M> = F extends EffectFunction<
   infer Args,
