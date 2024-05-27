@@ -7,8 +7,14 @@ export interface FptsConvertible<K extends string> {
 
 export interface AnyFptsConvertible extends FptsConvertible<any> {}
 
-type FptsIdOf<X extends AnyFptsConvertible> = X[FptsConvertibleId];
+export type FptsIdOf<X extends AnyFptsConvertible> = X[FptsConvertibleId];
 
 export type FptsAccess<X extends AnyFptsConvertible> = {
   [k in FptsIdOf<X>]: X;
+};
+
+export const makeAnyFptsConverible = <T extends AnyFptsConvertible>(
+  props: Omit<T, FptsConvertibleId>
+): T => {
+  return props as T;
 };

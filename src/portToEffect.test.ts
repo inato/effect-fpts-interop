@@ -3,19 +3,13 @@ import { readerTaskEither } from "fp-ts";
 import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 import { pipe } from "fp-ts/lib/function";
 import { portToEffect } from "./portToEffect";
-import type {
-  AnyFptsConvertible,
-  FptsAccess,
-  FptsConvertible,
-  FptsConvertibleId,
+import {
+  makeAnyFptsConverible,
+  type FptsAccess,
+  type FptsConvertible,
 } from "./FptsConvertible";
 
 it("portToEffect", async () => {
-  const makeAnyService = <T extends AnyFptsConvertible>(
-    props: Omit<T, FptsConvertibleId>
-  ): T => {
-    return props as T;
-  };
   interface Service2 extends FptsConvertible<"service2"> {
     bar(a: number): ReaderTaskEither<unknown, Error, number>;
   }
@@ -107,7 +101,7 @@ it("portToEffect", async () => {
     foo("Service"),
     Effect.provideService(
       tag2,
-      makeAnyService<Service2>({
+      makeAnyFptsConverible<Service2>({
         bar(a) {
           return readerTaskEither.of(a);
         },
@@ -115,7 +109,7 @@ it("portToEffect", async () => {
     ),
     Effect.provideService(
       tag3,
-      makeAnyService<Service3>({
+      makeAnyFptsConverible<Service3>({
         baz(a) {
           return readerTaskEither.of(a);
         },

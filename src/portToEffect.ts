@@ -1,6 +1,6 @@
 import { Context, Effect, pipe } from "effect";
 import type { AnyFptsFunction, FptsFunction } from "./FptsFunction";
-import type { InferFptsMapping } from "./InferFptsMapping";
+import type { InferFptsMappingFromFptsPort } from "./InferFptsMapping";
 import { eitherFromFpts } from "./effectFromFpts";
 
 type PortToEffect<P, M> = {
@@ -23,7 +23,7 @@ type PortToEffect<P, M> = {
     : never;
 };
 
-export const portToEffect: <P, M extends InferFptsMapping<P>>(
+export const portToEffect: <P, M extends InferFptsMappingFromFptsPort<P>>(
   port: P,
   mapping: M
 ) => PortToEffect<P, M> = (port, mapping) =>
@@ -36,7 +36,11 @@ export const portToEffect: <P, M extends InferFptsMapping<P>>(
             const fptsEnv = {};
             for (const fptsKey in mapping) {
               const tag = mapping[fptsKey];
-              const opt = Context.getOption(context, tag);
+              const opt = Context.getOption(
+                context,
+                // @ts-expect-error "Argument is not assignable to parameter of type 'Tag<unknown, unknown>'"
+                tag
+              );
               if (opt._tag === "Some") {
                 // @ts-expect-error "Type 'Extract<keyof M, string>' cannot be used to index type '{}'"
                 fptsEnv[fptsKey] = opt.value;
