@@ -16,5 +16,9 @@
     "@total-typescript/tsconfig": "^1.0.4",
     "pkgroll": "^2.1.1",
     "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "effect": "^3.2.5",
+    "fp-ts": "^2.16.6"
   }
 }
