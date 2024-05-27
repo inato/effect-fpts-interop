@@ -3,28 +3,33 @@ import { readerTaskEither } from "fp-ts";
 import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 import { pipe } from "fp-ts/lib/function";
 import { portToEffect } from "./portToEffect";
+import type {
+  AnyFptsConvertible,
+  FptsAccess,
+  FptsConvertible,
+  FptsConvertibleId,
+} from "./FptsConvertible";
 
 it("portToEffect", async () => {
-  interface Service2 {
+  const makeAnyService = <T extends AnyFptsConvertible>(
+    props: Omit<T, FptsConvertibleId>
+  ): T => {
+    return props as T;
+  };
+  interface Service2 extends FptsConvertible<"service2"> {
     bar(a: number): ReaderTaskEither<unknown, Error, number>;
   }
-  interface Service2Access {
-    service2: Service2;
-  }
+  interface Service2Access extends FptsAccess<Service2> {}
 
-  interface Service3 {
+  interface Service3 extends FptsConvertible<"service3"> {
     baz(a: number): ReaderTaskEither<unknown, Error, number>;
   }
-  interface Service3Access {
-    service3: Service3;
-  }
+  interface Service3Access extends FptsAccess<Service3> {}
 
-  interface Service4 {
+  interface Service4 extends FptsConvertible<"service4"> {
     fizz(a: number): ReaderTaskEither<unknown, Error, number>;
   }
-  interface Service4Access {
-    service4: Service4;
-  }
+  interface Service4Access extends FptsAccess<Service4> {}
 
   interface Service {
     foo(
@@ -100,16 +105,22 @@ it("portToEffect", async () => {
 
   const res = await pipe(
     foo("Service"),
-    Effect.provideService(tag2, {
-      bar(a) {
-        return readerTaskEither.of(a);
-      },
-    }),
-    Effect.provideService(tag3, {
-      baz(a) {
-        return readerTaskEither.of(a);
-      },
-    }),
+    Effect.provideService(
+      tag2,
+      makeAnyService<Service2>({
+        bar(a) {
+          return readerTaskEither.of(a);
+        },
+      })
+    ),
+    Effect.provideService(
+      tag3,
+      makeAnyService<Service3>({
+        baz(a) {
+          return readerTaskEither.of(a);
+        },
+      })
+    ),
     Effect.runPromise
   );
 

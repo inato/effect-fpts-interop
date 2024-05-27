@@ -1,5 +1,5 @@
 const FptsConvertibleId = Symbol("@inato/effect-fpts-interop/FptsConvertible");
-type FptsConvertibleId = typeof FptsConvertibleId;
+export type FptsConvertibleId = typeof FptsConvertibleId;
 
 export interface FptsConvertible<K extends string> {
   [FptsConvertibleId]: K;
