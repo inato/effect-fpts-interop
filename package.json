@@ -7,7 +7,8 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.cts",
   "scripts": {
-    "build": "pkgroll"
+    "build": "pkgroll",
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +16,8 @@
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",
     "pkgroll": "^2.1.1",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
   },
   "peerDependencies": {
     "effect": "^3.2.5",
