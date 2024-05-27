@@ -11,7 +11,7 @@ import type {
 import type { FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromEffectFunction } from "./internal/InferFptsMapping";
 
-type EffectToFpts<F, M> = F extends EffectFunction<
+type EffectFunctionToFpts<F, M> = F extends EffectFunction<
   infer Args,
   infer Env extends AnyFptsConvertible,
   infer Err,
@@ -27,13 +27,13 @@ type EffectToFpts<F, M> = F extends EffectFunction<
     >
   : never;
 
-export const effectToFpts: <
+export const effectFunctionToFpts: <
   F extends AnyEffectFunction,
   M extends InferFptsMappingFromEffectFunction<F>
 >(
   fun: F,
   mapping: M
-) => EffectToFpts<F, M> = (fun, mapping) =>
+) => EffectFunctionToFpts<F, M> = (fun, mapping) =>
   ((...args: any[]) =>
     (access: any) => {
       const effect = fun(...args);

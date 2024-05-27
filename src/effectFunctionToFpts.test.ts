@@ -4,10 +4,10 @@ import {
   type FptsConvertible,
 } from "./internal/FptsConvertible";
 import type { InferFptsMappingFromEffectFunction } from "./internal/InferFptsMapping";
-import { effectToFpts } from "./effectToFpts";
+import { effectFunctionToFpts } from "./effectFunctionToFpts";
 import { either } from "fp-ts";
 
-it("effectToFpts", async () => {
+it("effectFunctionToFpts", async () => {
   interface Service extends FptsConvertible<"service"> {
     foo(a: string): Effect.Effect<string, Error>;
   }
@@ -21,7 +21,7 @@ it("effectToFpts", async () => {
 
   type t = InferFptsMappingFromEffectFunction<typeof fun>;
 
-  const funFpts = effectToFpts(fun, {
+  const funFpts = effectFunctionToFpts(fun, {
     service: tag,
   });
 
