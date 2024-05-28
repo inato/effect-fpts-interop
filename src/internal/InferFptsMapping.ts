@@ -9,16 +9,6 @@ import type {
 } from "./FptsConvertible";
 import type { EffectFunction } from "./EffectFunction";
 
-type EmptyIfUnknown<T> = unknown extends T ? {} : T;
-
-type FptsFunctionEnv<T> = EmptyIfUnknown<
-  T extends FptsFunction<any, infer Env, any, any> ? Env : unknown
->;
-
-type ExtractFptsEnvAccess<T> = UnionToIntersection<
-  { [k in keyof T]: FptsFunctionEnv<T[k]> }[keyof T]
->;
-
 type ContextTagMapping<T> = T extends AnyFptsConvertible
   ? {
       [k in FptsIdOf<T>]: Context.Tag<any, Extract<T, FptsConvertible<k>>>;
@@ -32,10 +22,20 @@ type InferFptsMapping<T> = Exclude<T, AnyFptsConvertible> extends never
       ports: Exclude<T, AnyFptsConvertible>;
     };
 
+type EmptyIfUnknown<T> = unknown extends T ? {} : T;
+
+type FptsFunctionEnv<T> = EmptyIfUnknown<
+  T extends FptsFunction<any, infer Env, any, any> ? Env : unknown
+>;
+
+type FptsPortEnv<T> = UnionToIntersection<
+  { [k in keyof T]: FptsFunctionEnv<T[k]> }[keyof T]
+>;
+
 type InferFptsMappingFromFptsPortImpl<T> = InferFptsMapping<T[keyof T]>;
 
 export type InferFptsMappingFromFptsPort<T> = InferFptsMappingFromFptsPortImpl<
-  ExtractFptsEnvAccess<T>
+  FptsPortEnv<T>
 >;
 
 type EffectFunctionEnv<T> = EmptyIfUnknown<
@@ -46,4 +46,12 @@ type InferFptsMappingFromEffectFunctionImpl<T> = T;
 
 export type InferFptsMappingFromEffectFunction<T> = InferFptsMapping<
   EffectFunctionEnv<T>
+>;
+
+type EffectPortEnv<T> = {
+  [k in keyof T]: EffectFunctionEnv<T[k]>;
+}[keyof T];
+
+export type InferFptsMappingFromEffectPort<T> = InferFptsMapping<
+  EffectPortEnv<T>
 >;
