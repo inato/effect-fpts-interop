@@ -45,7 +45,7 @@ MeasureString.measure("hello 👋") // Effect<number, Error, MeasureString>
 ```ts
 import {
   getFptsMapping,
-  portToEffect,
+  portToFpts,
   type FptsAccess,
   type FptsConvertible,
 } from "@inato/effect-fpts-interop";
