@@ -1,6 +1,10 @@
 {
   "extends": "@total-typescript/tsconfig/bundler/no-dom/library",
   "compilerOptions": {
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "baseUrl": ".",
+    "paths": {
+      "@inato/effect-fpts-interop": ["src"]
+    }
   }
 }

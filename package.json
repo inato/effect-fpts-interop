@@ -1,5 +1,5 @@
 {
-  "name": "effect-fpts-interop",
+  "name": "@inato/effect-fpts-interop",
   "version": "1.0.0",
   "description": "",
   "type": "module",
