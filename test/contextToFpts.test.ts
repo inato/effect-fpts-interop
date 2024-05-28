@@ -1,6 +1,7 @@
 import { Context, Effect } from "effect";
 import { type FptsConvertible } from "../src/FptsConvertible";
 import { contextToFpts } from "../src/contextToFpts";
+import { getFptsMapping } from "../src/getFptsMapping";
 
 it("contextToFpts", async () => {
   interface Service extends FptsConvertible<"service"> {
@@ -26,9 +27,9 @@ it("contextToFpts", async () => {
     );
 
   const { service, service2, service3 } = contextToFpts(context, {
-    service: tag,
-    service2: tag2,
-    service3: tag3,
+    ...getFptsMapping(tag, "service"),
+    ...getFptsMapping(tag2, "service2"),
+    ...getFptsMapping(tag3, "service3"),
   });
 
   expect(service.foo("").pipe(Effect.runSync)).toBe("foo");

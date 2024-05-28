@@ -2,6 +2,7 @@ import { Context, Effect } from "effect";
 import { either } from "fp-ts";
 import { type FptsConvertible } from "../src/FptsConvertible";
 import { portToFpts } from "../src/portToFpts";
+import { getFptsMapping } from "../src/getFptsMapping";
 
 it("portToFpts", async () => {
   interface Service2 extends FptsConvertible<"service2"> {
@@ -44,8 +45,8 @@ it("portToFpts", async () => {
   });
 
   const { foo } = portToFpts(service1, {
-    service2: tag2,
-    service3: tag3,
+    ...getFptsMapping(tag2, "service2"),
+    ...getFptsMapping(tag3, "service3"),
   });
 
   const res = await foo("Service")({ service2, service3 })();

@@ -4,6 +4,7 @@ import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 import { pipe } from "fp-ts/lib/function";
 import { type FptsAccess, type FptsConvertible } from "../src/FptsConvertible";
 import { portToEffect } from "../src/portToEffect";
+import { getFptsMapping } from "../src/getFptsMapping";
 
 it("portToEffect", async () => {
   interface Service2 extends FptsConvertible<"service2"> {
@@ -70,9 +71,9 @@ it("portToEffect", async () => {
   const tag4 = Context.GenericTag<Service4>("@services/tag4");
 
   const effectifiedService = portToEffect(service1, {
-    service2: tag2,
-    service3: tag3,
-    service4: tag4,
+    ...getFptsMapping(tag2, "service2"),
+    ...getFptsMapping(tag3, "service3"),
+    ...getFptsMapping(tag4, "service4"),
   });
   const { foo, foo2, foo3 } = effectifiedService;
 

@@ -15,7 +15,7 @@ type PortToEffect<P, M> = {
   >
     ? EffectFunction<
         Args,
-        Context.Tag.Identifier<
+        Context.Tag.Service<
           //@ts-expect-error "Type 'keyof Env' cannot be used to index type 'Mapping'"
           M[keyof Env]
         >,
