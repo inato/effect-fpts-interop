@@ -9,7 +9,7 @@ import type {
 } from "../FptsConvertible";
 import type { EffectFunction } from "./EffectFunction";
 
-type ContextTagMapping<T> = T extends AnyFptsConvertible
+export type ContextTagMapping<T> = T extends AnyFptsConvertible
   ? {
       [k in FptsIdOf<T>]: Context.Tag<any, Extract<T, FptsConvertible<k>>>;
     }
