@@ -1,9 +1,6 @@
 import { Context, Effect } from "effect";
 import { either } from "fp-ts";
-import {
-  makeAnyFptsConverible,
-  type FptsConvertible,
-} from "../src/FptsConvertible";
+import { type FptsConvertible } from "../src/FptsConvertible";
 import { effectFunctionToFpts } from "../src/effectFunctionToFpts";
 
 it("effectFunctionToFpts", async () => {
@@ -23,13 +20,11 @@ it("effectFunctionToFpts", async () => {
   });
 
   const res = await funFpts("value")({
-    service: tag.of(
-      makeAnyFptsConverible({
-        foo(a: string) {
-          return Effect.succeed(a);
-        },
-      })
-    ),
+    service: tag.of({
+      foo(a: string) {
+        return Effect.succeed(a);
+      },
+    }),
   })();
 
   assert(either.isRight(res));

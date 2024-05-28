@@ -1,8 +1,5 @@
 import { Context, Effect } from "effect";
-import {
-  makeAnyFptsConverible,
-  type FptsConvertible,
-} from "../src/FptsConvertible";
+import { type FptsConvertible } from "../src/FptsConvertible";
 import { contextToFpts } from "../src/contextToFpts";
 
 it("contextToFpts", async () => {
@@ -23,18 +20,9 @@ it("contextToFpts", async () => {
 
   const context: Context.Context<Service | Service2 | Service3> =
     Context.empty().pipe(
-      Context.add(
-        tag,
-        makeAnyFptsConverible({ foo: () => Effect.succeed("foo") })
-      ),
-      Context.add(
-        tag2,
-        makeAnyFptsConverible({ bar: () => Effect.succeed("bar") })
-      ),
-      Context.add(
-        tag3,
-        makeAnyFptsConverible({ baz: () => Effect.succeed("baz") })
-      )
+      Context.add(tag, { foo: () => Effect.succeed("foo") }),
+      Context.add(tag2, { bar: () => Effect.succeed("bar") }),
+      Context.add(tag3, { baz: () => Effect.succeed("baz") })
     );
 
   const { service, service2, service3 } = contextToFpts(context, {

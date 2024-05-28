@@ -2,11 +2,7 @@ import { Context, Effect } from "effect";
 import { readerTaskEither } from "fp-ts";
 import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 import { pipe } from "fp-ts/lib/function";
-import {
-  makeAnyFptsConverible,
-  type FptsAccess,
-  type FptsConvertible,
-} from "../src/FptsConvertible";
+import { type FptsAccess, type FptsConvertible } from "../src/FptsConvertible";
 import { portToEffect } from "../src/portToEffect";
 
 it("portToEffect", async () => {
@@ -99,22 +95,16 @@ it("portToEffect", async () => {
 
   const res = await pipe(
     foo("Service"),
-    Effect.provideService(
-      tag2,
-      makeAnyFptsConverible<Service2>({
-        bar(a) {
-          return readerTaskEither.of(a);
-        },
-      })
-    ),
-    Effect.provideService(
-      tag3,
-      makeAnyFptsConverible<Service3>({
-        baz(a) {
-          return readerTaskEither.of(a);
-        },
-      })
-    ),
+    Effect.provideService(tag2, {
+      bar(a) {
+        return readerTaskEither.of(a);
+      },
+    }),
+    Effect.provideService(tag3, {
+      baz(a) {
+        return readerTaskEither.of(a);
+      },
+    }),
     Effect.runPromise
   );
 

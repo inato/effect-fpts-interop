@@ -1,9 +1,6 @@
 import { Context, Effect } from "effect";
 import { either } from "fp-ts";
-import {
-  makeAnyFptsConverible,
-  type FptsConvertible,
-} from "../src/FptsConvertible";
+import { type FptsConvertible } from "../src/FptsConvertible";
 import { portToFpts } from "../src/portToFpts";
 
 it("portToFpts", async () => {
@@ -23,21 +20,17 @@ it("portToFpts", async () => {
 
   const tag = Context.GenericTag<Service>("@services/tag");
 
-  const service2 = tag2.of(
-    makeAnyFptsConverible({
-      bar(a) {
-        return Effect.succeed(a);
-      },
-    })
-  );
+  const service2 = tag2.of({
+    bar(a) {
+      return Effect.succeed(a);
+    },
+  });
 
-  const service3 = tag3.of(
-    makeAnyFptsConverible({
-      baz(a) {
-        return Effect.succeed(a);
-      },
-    })
-  );
+  const service3 = tag3.of({
+    baz(a) {
+      return Effect.succeed(a);
+    },
+  });
 
   const service1 = tag.of({
     foo(a) {
