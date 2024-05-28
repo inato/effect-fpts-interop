@@ -1,5 +1,3 @@
-import { identity } from "effect";
-
 export const FptsConvertibleId = Symbol(
   "@inato/effect-fpts-interop/FptsConvertible"
 );
