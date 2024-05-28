@@ -55,3 +55,12 @@ type EffectPortEnv<T> = {
 export type InferFptsMappingFromEffectPort<T> = InferFptsMapping<
   EffectPortEnv<T>
 >;
+
+type ContextEnv<T> = T extends Context.Context<infer Env> ? Env : never;
+
+type InferFptsMappingFromEffectContextImpl<T> = T extends AnyFptsConvertible
+  ? InferFptsMapping<T>
+  : never;
+
+export type InferFptsMappingFromEffectContext<T> =
+  InferFptsMappingFromEffectContextImpl<ContextEnv<T>>;
