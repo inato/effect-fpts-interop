@@ -72,4 +72,4 @@ const MeasureStringFpts = portToFpts(
 MeasureStringFpts.measure("hello 👋") // ReaderTaskEither<MeasureStringAccess, Error, number>
 ```
 
-And more.. Have a look at the [example]("/example/program.ts") section!
+And more.. Have a look at the [example](/example/program.ts) section!
