@@ -2,6 +2,7 @@ import { Context, Effect, pipe } from "effect";
 import type { AnyFptsFunction, FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromFptsPort } from "./internal/InferFptsMapping";
 import { eitherFromFpts } from "./internal/effectFromFpts";
+import type { EffectFunction } from "./internal/EffectFunction";
 
 type PortToEffect<P, M> = {
   [k in keyof P as P[k] extends AnyFptsFunction
@@ -12,13 +13,14 @@ type PortToEffect<P, M> = {
     infer Err,
     infer A
   >
-    ? (...args: Args) => Effect.Effect<
-        A,
-        Err,
+    ? EffectFunction<
+        Args,
         Context.Tag.Identifier<
           //@ts-expect-error "Type 'keyof Env' cannot be used to index type 'Mapping'"
           M[keyof Env]
-        >
+        >,
+        Err,
+        A
       >
     : never;
 };
