@@ -6,10 +6,10 @@ settings:
 
 dependencies:
   effect:
-    specifier: ^3.2.5
+    specifier: ^3
     version: 3.2.5
   fp-ts:
-    specifier: ^2.16.6
+    specifier: ^2
     version: 2.16.6
 
 devDependencies:
