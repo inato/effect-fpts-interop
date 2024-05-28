@@ -1,7 +1,25 @@
 {
   "name": "@inato/effect-fpts-interop",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Helper functions to interoperate between the Effect framework and the fp-ts library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inato/effect-fpts-interop.git"
+  },
+  "keywords": [
+    "typescript",
+    "fp-ts",
+    "effect",
+    "functional-programming",
+    "interoperability",
+    "helper-functions"
+  ],
+  "author": "Inato",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inato/effect-fpts-interop/issues"
+  },
+  "homepage": "https://github.com/inato/effect-fpts-interop#readme",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -11,9 +29,6 @@
     "build": "pkgroll",
     "test": "vitest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",
     "pkgroll": "^2.1.1",
