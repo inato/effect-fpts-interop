@@ -1,11 +1,10 @@
 import { Context, Effect } from "effect";
+import { either } from "fp-ts";
 import {
   makeAnyFptsConverible,
   type FptsConvertible,
-} from "./internal/FptsConvertible";
-import type { InferFptsMappingFromEffectFunction } from "./internal/InferFptsMapping";
-import { effectFunctionToFpts } from "./effectFunctionToFpts";
-import { either } from "fp-ts";
+} from "../src/FptsConvertible";
+import { effectFunctionToFpts } from "../src/effectFunctionToFpts";
 
 it("effectFunctionToFpts", async () => {
   interface Service extends FptsConvertible<"service"> {
@@ -18,8 +17,6 @@ it("effectFunctionToFpts", async () => {
       const service = yield* _(tag);
       return x + (yield* _(service.foo("x")));
     });
-
-  type t = InferFptsMappingFromEffectFunction<typeof fun>;
 
   const funFpts = effectFunctionToFpts(fun, {
     service: tag,

@@ -2,12 +2,12 @@ import { Context, Effect } from "effect";
 import { readerTaskEither } from "fp-ts";
 import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 import { pipe } from "fp-ts/lib/function";
-import { portToEffect } from "./portToEffect";
 import {
   makeAnyFptsConverible,
   type FptsAccess,
   type FptsConvertible,
-} from "./internal/FptsConvertible";
+} from "../src/FptsConvertible";
+import { portToEffect } from "../src/portToEffect";
 
 it("portToEffect", async () => {
   interface Service2 extends FptsConvertible<"service2"> {

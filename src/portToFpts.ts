@@ -7,7 +7,7 @@ import type {
   AnyFptsConvertible,
   FptsConvertible,
   FptsIdOf,
-} from "./internal/FptsConvertible";
+} from "./FptsConvertible";
 import type { FptsFunction } from "./internal/FptsFunction";
 import type {
   InferFptsMappingFromEffectFunction,

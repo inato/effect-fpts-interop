@@ -2,9 +2,8 @@ import { Context, Effect } from "effect";
 import {
   makeAnyFptsConverible,
   type FptsConvertible,
-  type FptsIdOf,
-} from "./internal/FptsConvertible";
-import { contextToFpts } from "./contextToFpts";
+} from "../src/FptsConvertible";
+import { contextToFpts } from "../src/contextToFpts";
 
 it("contextToFpts", async () => {
   interface Service extends FptsConvertible<"service"> {

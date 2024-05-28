@@ -6,7 +6,7 @@ import type {
   AnyFptsConvertible,
   FptsConvertible,
   FptsIdOf,
-} from "./FptsConvertible";
+} from "../FptsConvertible";
 import type { EffectFunction } from "./EffectFunction";
 
 type ContextTagMapping<T> = T extends AnyFptsConvertible

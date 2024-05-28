@@ -1,7 +1,7 @@
 import { Context, Effect, pipe } from "effect";
 import type { AnyFptsFunction, FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromFptsPort } from "./internal/InferFptsMapping";
-import { eitherFromFpts } from "./internal/effectFromFpts";
+import { eitherFromFpts } from "./internal/eitherFromFpts";
 import type { EffectFunction } from "./internal/EffectFunction";
 
 type PortToEffect<P, M> = {
