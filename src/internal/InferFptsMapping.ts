@@ -15,7 +15,10 @@ export type ContextTagMapping<T> = T extends AnyFptsConvertible
     }
   : never;
 
-type InferFptsMapping<T> = Exclude<T, AnyFptsConvertible> extends never
+type InferFptsMapping<T> = Exclude<
+  T,
+  AnyFptsConvertible | undefined
+> extends never
   ? UnionToIntersection<ContextTagMapping<T>>
   : {
       error: `ERROR all ports should derive from FptsConvertible`;
@@ -28,7 +31,7 @@ type FptsFunctionEnv<T> = EmptyIfUnknown<
   T extends FptsFunction<any, infer Env, any, any> ? Env : unknown
 >;
 
-export type FptsPortEnv<T> = UnionToIntersection<
+type FptsPortEnv<T> = UnionToIntersection<
   { [k in keyof T]: FptsFunctionEnv<T[k]> }[keyof T]
 >;
 
