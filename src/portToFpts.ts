@@ -1,4 +1,4 @@
-import { Context, Effect } from "effect";
+import { Context, Effect, Either } from "effect";
 import type {
   AnyEffectFunction,
   EffectFunction,
@@ -13,7 +13,11 @@ import type {
   InferFptsMappingFromEffectFunction,
   InferFptsMappingFromEffectPort,
 } from "./internal/InferFptsMapping";
-import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
+import type { Reader } from "fp-ts/Reader";
+import type { Task } from "fp-ts/Task";
+
+export interface ReaderTaskEither<R, E, A>
+  extends Reader<R, Task<Either.Either<A, E>>> {}
 
 type PortToFpts<P, M> = {
   [k in keyof P as P[k] extends AnyEffectFunction
