@@ -13,7 +13,6 @@ import type {
   InferFptsMappingFromEffectFunction,
   InferFptsMappingFromEffectPort,
 } from "./internal/InferFptsMapping";
-import { effectFunctionToFpts } from "./effectFunctionToFpts";
 import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 
 type PortToFpts<P, M> = {
@@ -41,10 +40,27 @@ export const portToFpts: <P, M extends InferFptsMappingFromEffectPort<P>>(
 ) => PortToFpts<P, M> = (port, mapping) =>
   new Proxy({} as any, {
     get(_target, k) {
-      return effectFunctionToFpts(
-        //@ts-expect-error
-        port[k],
-        mapping
-      );
+      return ((...args: any[]) =>
+        (access: any) => {
+          const effect =
+            //@ts-expect-error
+            port[k](...args);
+          let ctx = Context.empty();
+          for (const m in mapping) {
+            if (access[m] !== undefined) {
+              ctx = Context.add(
+                //@ts-expect-error
+                mapping[m],
+                access[m]
+              )(ctx);
+            }
+          }
+          return () =>
+            effect.pipe(
+              Effect.provide(ctx as Context.Context<any>),
+              Effect.either,
+              Effect.runPromise
+            );
+        }) as any;
     },
   });

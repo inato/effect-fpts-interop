@@ -4,7 +4,6 @@ import type { ReaderTaskEither as RTE } from "fp-ts/ReaderTaskEither";
 
 import {
   contextToFpts,
-  effectFunctionToFpts,
   getFptsMapping,
   portToFpts,
   type FptsAccess,
@@ -63,19 +62,20 @@ const TransformFooServiceFpts = portToFpts(
 declare const TransformFooServiceLive: Layer.Layer<TransformFooService>;
 
 // usecases
-export const createFooUseCase: RTE<FooRepositoryAccess, Error, Foo> = pipe(
+const createFooUseCase: RTE<FooRepositoryAccess, Error, Foo> = pipe(
   rte.of(Foo.make()),
   rte.tap(FooRepositoryFpts.store)
 );
 
-export const transformFooUseCase = (id: string) =>
+const transformFooUseCase = (id: string) =>
   FooRepository.getById(id).pipe(
     Effect.flatMap(TransformFooService.transform),
     Effect.flatMap(FooRepository.store)
   );
 
-export const transformFooUseCaseFpts = effectFunctionToFpts(
-  transformFooUseCase,
+// we keep this 👇 fpts version of the use case for backward compatibility
+export const { transformFooUseCase: transformFooUseCaseFpts } = portToFpts(
+  { transformFooUseCase },
   {
     ...TransformFooServiceFptsMapping,
     ...FooRepositoryFptsMapping,
