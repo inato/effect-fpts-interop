@@ -3,7 +3,7 @@
 Helper functions to interoperate between the Effect type and the ReaderTaskEither type.
 
 > [!NOTE]
-> This repository acts as supporting document for [this article](https://medium.com/@laure_rc/b71acd0c5640) that describe how at Inato we successfully migrated to Effect.
+> _This repository acts as supporting document for [this article](https://medium.com/@laure_rc/b71acd0c5640) that describe how at Inato we successfully migrated to Effect._
 
 ## Installation
 
