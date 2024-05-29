@@ -1,6 +1,6 @@
 {
   "name": "@inato/effect-fpts-interop",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Helper functions to interoperate between the Effect framework and the fp-ts library",
   "repository": {
     "type": "git",
