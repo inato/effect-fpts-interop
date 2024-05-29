@@ -9,10 +9,7 @@ import type {
   FptsIdOf,
 } from "./FptsConvertible";
 import type { FptsFunction } from "./internal/FptsFunction";
-import type {
-  InferFptsMappingFromEffectFunction,
-  InferFptsMappingFromEffectPort,
-} from "./internal/InferFptsMapping";
+import type { InferFptsMappingFromEffectPort } from "./internal/InferFptsMapping";
 import type { Reader } from "fp-ts/Reader";
 import type { Task } from "fp-ts/Task";
 
