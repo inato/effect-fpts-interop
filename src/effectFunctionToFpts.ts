@@ -10,6 +10,7 @@ import type {
 } from "./FptsConvertible";
 import type { FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromEffectFunction } from "./internal/InferFptsMapping";
+import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 
 type EffectFunctionToFpts<F, M> = F extends EffectFunction<
   infer Args,
@@ -17,8 +18,7 @@ type EffectFunctionToFpts<F, M> = F extends EffectFunction<
   infer Err,
   infer A
 >
-  ? FptsFunction<
-      Args,
+  ? (...args: Args) => ReaderTaskEither<
       {
         [k in FptsIdOf<Env>]: Extract<Env, FptsConvertible<k>>;
       },

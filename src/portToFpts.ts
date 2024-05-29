@@ -14,6 +14,7 @@ import type {
   InferFptsMappingFromEffectPort,
 } from "./internal/InferFptsMapping";
 import { effectFunctionToFpts } from "./effectFunctionToFpts";
+import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
 
 type PortToFpts<P, M> = {
   [k in keyof P as P[k] extends AnyEffectFunction
@@ -24,8 +25,7 @@ type PortToFpts<P, M> = {
     infer Err,
     infer A
   >
-    ? FptsFunction<
-        Args,
+    ? (...args: Args) => ReaderTaskEither<
         {
           [k in FptsIdOf<Env>]: Extract<Env, FptsConvertible<k>>;
         },

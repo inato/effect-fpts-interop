@@ -13,14 +13,13 @@ type PortToEffect<P, M> = {
     infer Err,
     infer A
   >
-    ? EffectFunction<
-        Args,
+    ? (...args: Args) => Effect.Effect<
+        A,
+        Err,
         Context.Tag.Service<
           //@ts-expect-error "Type 'keyof Env' cannot be used to index type 'Mapping'"
           M[keyof Env]
-        >,
-        Err,
-        A
+        >
       >
     : never;
 };
