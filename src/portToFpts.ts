@@ -1,5 +1,4 @@
 import { Context, Effect } from "effect";
-import type { FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromEffectPort } from "./internal/InferFptsMapping";
 import type { PortToFpts } from "./internal/PortToFpts";
 

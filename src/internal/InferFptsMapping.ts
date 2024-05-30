@@ -1,13 +1,12 @@
 import type { Context } from "effect";
 import type { UnionToIntersection } from "effect/Types";
-import type { ReaderTaskEither } from "fp-ts/ReaderTaskEither";
-import type { FptsFunction } from "./FptsFunction";
 import type {
   AnyFptsConvertible,
   FptsConvertible,
   FptsIdOf,
 } from "../FptsConvertible";
 import type { EffectFunction } from "./EffectFunction";
+import type { FptsFunction } from "./FptsFunction";
 
 export type ContextTagMapping<T> = T extends AnyFptsConvertible
   ? {

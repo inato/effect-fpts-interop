@@ -1,8 +1,8 @@
 import { Context, Effect } from "effect";
 import { either } from "fp-ts";
 import { type FptsConvertible } from "../src/FptsConvertible";
-import { portToFpts } from "../src/portToFpts";
 import { getFptsMapping } from "../src/getFptsMapping";
+import { portToFpts } from "../src/portToFpts";
 
 it("portToFpts", async () => {
   interface Service2 extends FptsConvertible<"service2"> {

@@ -1,10 +1,10 @@
-import type { AnyEffectFunction, EffectFunction } from "./EffectFunction";
 import type {
   AnyFptsConvertible,
   FptsConvertible,
   FptsIdOf,
 } from "../FptsConvertible";
 import type { ReaderTaskEither } from "../ReaderTaskEither";
+import type { AnyEffectFunction, EffectFunction } from "./EffectFunction";
 
 export type PortToFpts<P, M> = {
   [k in keyof P as P[k] extends AnyEffectFunction

@@ -1,10 +1,6 @@
-import { Context, Effect, pipe } from "effect";
-import type { AnyFptsFunction, FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromFptsPort } from "./internal/InferFptsMapping";
-import { eitherFromFpts } from "./internal/eitherFromFpts";
-import type { EffectFunction } from "./internal/EffectFunction";
-import { portToEffect } from "./portToEffect";
 import { type PortToEffect } from "./internal/PortToEffect";
+import { portToEffect } from "./portToEffect";
 
 // @ts-expect-error "Type '"fun"' cannot be used to index type 'PortToEffect<{ fun: F; }, M>'"
 type FunctionToEffect<F, M> = PortToEffect<{ fun: F }, M>["fun"];
