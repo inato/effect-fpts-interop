@@ -59,9 +59,10 @@ export type InferFptsMappingFromEffectPort<T> = InferFptsMapping<
 
 type ContextEnv<T> = T extends Context.Context<infer Env> ? Env : never;
 
-type InferFptsMappingFromEffectContextImpl<T> = T extends AnyFptsConvertible
-  ? InferFptsMapping<T>
-  : never;
+export type InferFptsMappingFromServices<T> = UnionToIntersection<
+  T extends AnyFptsConvertible ? InferFptsMapping<T> : never
+>;
 
-export type InferFptsMappingFromEffectContext<T> =
-  InferFptsMappingFromEffectContextImpl<ContextEnv<T>>;
+export type InferFptsMappingFromEffectContext<T> = InferFptsMappingFromServices<
+  ContextEnv<T>
+>;

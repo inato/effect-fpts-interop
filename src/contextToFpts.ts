@@ -18,7 +18,11 @@ export const contextToFpts: <
 ) => ContextToFpts<M> = (context, mapping) => {
   const res: any = {};
   for (const [key, tag] of Object.entries(mapping)) {
-    const service = Context.getOption(context, tag);
+    const service = Context.getOption(
+      context,
+      //@ts-expect-error "tag is of type unknown"
+      tag
+    );
     if (Option.isSome(service)) {
       res[key] = service.value;
     }
