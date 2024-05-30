@@ -1,15 +1,10 @@
-import { Either } from "effect";
 import type { AnyEffectFunction, EffectFunction } from "./EffectFunction";
 import type {
   AnyFptsConvertible,
   FptsConvertible,
   FptsIdOf,
 } from "../FptsConvertible";
-import type { Reader } from "fp-ts/Reader";
-import type { Task } from "fp-ts/Task";
-
-export interface ReaderTaskEither<R, E, A>
-  extends Reader<R, Task<Either.Either<A, E>>> {}
+import type { ReaderTaskEither } from "../ReaderTaskEither";
 
 export type PortToFpts<P, M> = {
   [k in keyof P as P[k] extends AnyEffectFunction

@@ -3,8 +3,6 @@ import type { FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromEffectPort } from "./internal/InferFptsMapping";
 import type { PortToFpts } from "./internal/PortToFpts";
 
-export type { ReaderTaskEither } from "./internal/PortToFpts";
-
 export const portToFpts: <P, M extends InferFptsMappingFromEffectPort<P>>(
   port: P,
   mapping: M
