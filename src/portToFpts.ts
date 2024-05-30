@@ -1,39 +1,9 @@
-import { Context, Effect, Either } from "effect";
-import type {
-  AnyEffectFunction,
-  EffectFunction,
-} from "./internal/EffectFunction";
-import type {
-  AnyFptsConvertible,
-  FptsConvertible,
-  FptsIdOf,
-} from "./FptsConvertible";
+import { Context, Effect } from "effect";
 import type { FptsFunction } from "./internal/FptsFunction";
 import type { InferFptsMappingFromEffectPort } from "./internal/InferFptsMapping";
-import type { Reader } from "fp-ts/Reader";
-import type { Task } from "fp-ts/Task";
+import type { PortToFpts } from "./internal/PortToFpts";
 
-export interface ReaderTaskEither<R, E, A>
-  extends Reader<R, Task<Either.Either<A, E>>> {}
-
-type PortToFpts<P, M> = {
-  [k in keyof P as P[k] extends AnyEffectFunction
-    ? k
-    : never]: P[k] extends EffectFunction<
-    infer Args,
-    infer Env extends AnyFptsConvertible,
-    infer Err,
-    infer A
-  >
-    ? (...args: Args) => ReaderTaskEither<
-        {
-          [k in FptsIdOf<Env>]: Extract<Env, FptsConvertible<k>>;
-        },
-        Err,
-        A
-      >
-    : never;
-};
+export type { ReaderTaskEither } from "./internal/PortToFpts";
 
 export const portToFpts: <P, M extends InferFptsMappingFromEffectPort<P>>(
   port: P,
