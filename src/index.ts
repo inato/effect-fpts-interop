@@ -1,4 +1,5 @@
 export * from "./contextToFpts.js";
+export * from "./eitherFromFpts.js";
 export * from "./FptsConvertible.js";
 export * from "./functionToEffect.js";
 export * from "./functionToFpts.js";

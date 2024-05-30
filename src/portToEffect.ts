@@ -1,7 +1,7 @@
 import { Context, Effect, pipe } from "effect";
+import { eitherFromFpts } from "./eitherFromFpts";
 import type { InferFptsMappingFromFptsPort } from "./internal/InferFptsMapping";
 import type { PortToEffect } from "./internal/PortToEffect";
-import { eitherFromFpts } from "./internal/eitherFromFpts";
 
 export const portToEffect: <P, M extends InferFptsMappingFromFptsPort<P>>(
   port: P,
